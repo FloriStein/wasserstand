@@ -7,7 +7,7 @@ import outputs from '../amplify_outputs.json';
 
 
 // Amplify Konfiguration aus den generierten Outputs laden
-const amplifyConfig = parseAmplifyConfig(outputs);
+/*const amplifyConfig = parseAmplifyConfig(outputs);
 
 Amplify.configure({
     ...amplifyConfig,
@@ -15,6 +15,6 @@ Amplify.configure({
         ...amplifyConfig.API,
         REST: outputs.custom?.API ?? {}, // Sicherstellen, dass API-Daten existieren
     },
-});
+});*/
 
 createApp(App).mount("#app");
