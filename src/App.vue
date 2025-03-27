@@ -5,7 +5,6 @@ import TemperatureDisplay from './components/TemperatureDisplay.vue'
 
 <template>
   <main>
-    <Todos />
     <TemperatureDisplay />
   </main>
 </template>
