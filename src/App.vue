@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Temperature from './components/Temperature.vue'
+import Temperature from 'src/components/Temperature.vue'
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { API } from "aws-amplify";
+import { API } from "@aws-amplify/api"; // Korrekte Importweise in Amplify v6+
 
 const temperature = ref(null);
 const errorMessage = ref("");
