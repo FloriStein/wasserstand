@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "aws-amplify": "^6.6.6",
+    "mqtt": "^5.10.4",
     "vue": "^3.4.21"
   },
   "devDependencies": {
