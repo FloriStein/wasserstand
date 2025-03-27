@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import Todos from './components/Todos.vue'
-import TemperatureDisplay from './components/TemperatureDisplay.vue'
+import Temperature from './components/Temperature.vue'
 </script>
 
 <template>
   <main>
-    <TemperatureDisplay />
+    <Temperature />
   </main>
 </template>
 
