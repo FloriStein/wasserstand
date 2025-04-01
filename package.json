@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@aws-sdk/client-iot-data-plane": "^3.775.0",
     "aws-amplify": "^6.6.6",
     "mqtt": "^5.10.4",
     "vue": "^3.4.21"

@@ -1,29 +1,15 @@
 <template>
   <div>
-    <h2>Aktuelle Temperatur</h2>
-    <p v-if="temperature !== null">Temperatur: {{ temperature }}°C</p>
-    <p v-else>Warte auf Daten...</p>
+    <h2>Temperatur-Dashboard</h2>
+    <iframe
+        :src="grafanaUrl"
+        width="100%"
+        height="600"
+        frameborder="0"
+    ></iframe>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, onUnmounted } from 'vue';
-import { useAwsIot, disconnectFromMqtt } from '@/useAwsIot'; // Importiere die composable-Funktion
-
-export default defineComponent({
-  name: 'TemperatureDisplay',
-  setup() {
-    // Verwende die composable-Funktion, um die Temperatur zu bekommen
-    const { temperature } = useAwsIot();
-
-    // Trennen der Verbindung beim Verlassen der Komponente
-    onUnmounted(() => {
-      disconnectFromMqtt();
-    });
-
-    // Rückgabe der Temperatur, damit sie im Template verwendet werden kann
-    return { temperature };
-  }
-});
+<script setup>
+  const grafanaUrl = "https://g-36c53baaa0.grafana-workspace.eu-central-1.amazonaws.com/goto/dPwgAXTHg?orgId=1";
 </script>
-
