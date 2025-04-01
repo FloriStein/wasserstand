@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@aws-amplify/ui-vue": "^4.3.0",
     "@aws-sdk/client-iot-data-plane": "^3.775.0",
     "@babel/plugin-transform-class-properties": "^7.25.9",
     "@babel/plugin-transform-object-rest-spread": "^7.25.9",

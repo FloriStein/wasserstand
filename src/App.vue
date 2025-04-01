@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import temperatureGraph from './components/temperatureGraph.vue'
+  import { Authenticator } from "@aws-amplify/ui-vue";
+  import "@aws-amplify/ui-vue/styles.css";
+  import temperatureGraph from './components/temperatureGraph.vue'
 </script>
 
 <template>
   <main>
-    <temperatureGraph />
+
+    <authenticator>
+      <template v-slot="{ signOut }">
+        <temperatureGraph />
+        <button @click="signOut">Sign Out</button>
+      </template>
+    </authenticator>
   </main>
 </template>
 
