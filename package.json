@@ -12,9 +12,15 @@
   },
   "dependencies": {
     "@aws-sdk/client-iot-data-plane": "^3.775.0",
+    "@babel/plugin-transform-class-properties": "^7.25.9",
+    "@babel/plugin-transform-object-rest-spread": "^7.25.9",
+    "@vue/language-service": "^2.2.8",
     "aws-amplify": "^6.6.6",
     "core-js": "^3.41.0",
+    "glob": "^11.0.1",
     "mqtt": "^5.10.4",
+    "rimraf": "^6.0.1",
+    "ts-algebra": "^2.0.0",
     "vue": "^3.4.21"
   },
   "devDependencies": {
@@ -22,7 +28,7 @@
     "@aws-amplify/backend-cli": "^1.2.9",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.12.5",
-    "@vitejs/plugin-vue": "^5.0.4",
+    "@vitejs/plugin-vue": "^5.2.3",
     "@volar/vue-language-server": "^0.40.13",
     "@vue/tsconfig": "^0.5.1",
     "@vue/typescript": "^1.8.20",
@@ -34,6 +40,6 @@
     "tsx": "^4.7.2",
     "typescript": "^5.8.2",
     "vite": "^6.2.4",
-    "vue-tsc": "^2.0.11"
+    "vue-tsc": "^2.2.8"
   }
 }
