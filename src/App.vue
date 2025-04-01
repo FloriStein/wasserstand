@@ -6,7 +6,6 @@
 
 <template>
   <main>
-
     <authenticator>
       <template v-slot="{ signOut }">
         <temperatureGraph />
