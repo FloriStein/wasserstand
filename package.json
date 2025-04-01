@@ -23,14 +23,16 @@
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
+    "@volar/vue-language-server": "^0.40.13",
     "@vue/tsconfig": "^0.5.1",
+    "@vue/typescript": "^1.8.20",
     "aws-cdk": "^2.137.0",
     "aws-cdk-lib": "^2.137.0",
     "constructs": "^10.3.0",
     "esbuild": "^0.25.2",
     "npm-run-all2": "^6.1.2",
     "tsx": "^4.7.2",
-    "typescript": "^5.4.5",
+    "typescript": "^5.8.2",
     "vite": "^6.2.4",
     "vue-tsc": "^2.0.11"
   }
