@@ -10,5 +10,5 @@
 </template>
 
 <script setup>
-  const grafanaUrl = "https://g-36c53baaa0.grafana-workspace.eu-central-1.amazonaws.com/goto/dPwgAXTHg?orgId=1";
+const grafanaUrl = "https://g-36c53baaa0.grafana-workspace.eu-central-1.amazonaws.com/goto/dPwgAXTHg?orgId=1";
 </script>

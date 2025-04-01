@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import TemperatureDisplay from './components/TemperatureDisplay.vue'
+import temperatureGraph from './components/temperatureGraph.vue'
 </script>
 
 <template>
   <main>
-    <TemperatureDisplay />
+    <temperatureGraph />
   </main>
 </template>
 
