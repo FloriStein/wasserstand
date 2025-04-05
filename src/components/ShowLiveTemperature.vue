@@ -22,10 +22,10 @@ let temperatureSub: { unsubscribe: () => void } | null = null;
 
 onMounted(() => {
   // Subscription für Temperaturänderungen
-  temperatureSub = client.models.Temperature.onUpdate().subscribe({
-    next: (updatedTemperature: any) => {
-      console.log('Temperatur Update empfangen:', updatedTemperature);
-      temperature.value = updatedTemperature; // Temperatur-Daten aktualisieren
+  temperatureSub = client.models.Temperature.onCreate().subscribe({
+    next: (createdTemperature: any) => {
+      console.log('Temperatur Update empfangen:', createdTemperature);
+      temperature.value = createdTemperature;
     },
     error: (err: any) => {
       console.error('Fehler beim Empfangen von Temperatur-Updates:', err);
