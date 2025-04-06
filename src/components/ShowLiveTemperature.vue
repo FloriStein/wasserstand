@@ -3,7 +3,7 @@
     <h1>Aktuelle Temperatur</h1>
     <ul v-if="temperatures.length">
       <li v-for="(temp, index) in temperatures" :key="index">
-        Temperatur: {{ temp.status }}°C ({{ temp.timestamp }})
+        Temperatur: {{ temp.temperature }}°C ({{ temp.timestamp }})
       </li>
     </ul>
     <p v-else>Keine Temperaturdaten verfügbar</p>
@@ -18,7 +18,7 @@ import type { Schema } from '../../amplify/data/resource';
 const client = generateClient<Schema>();
 
 // Reaktive Variable als Liste, um mehrere Temperaturdaten zu speichern
-const temperatures = ref<Array<{ status: string; timestamp: string }>>([]);
+const temperatures = ref<Array<{ temperature: string; timestamp: string }>>([]);
 
 // Subscription-Referenzen
 let createSub: { unsubscribe: () => void } | null = null;

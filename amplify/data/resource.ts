@@ -9,7 +9,7 @@
           Temperature: a
               .model({
                 /** Temperaturwert als Text, z. B. "23.5" */
-                status: a.string().required(),
+                temperature: a.string().required(),
                 /** Zeitpunkt der Messung */
                 timestamp: a.datetime().required()
               })
