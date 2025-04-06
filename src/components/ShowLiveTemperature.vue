@@ -1,11 +1,7 @@
 <template>
   <div class="temperature-monitor">
     <h1>Aktuelle Temperatur</h1>
-    <ul v-if="temperatures.length">
-      <li v-for="(temp, index) in temperatures" :key="index">
-        Temperatur: {{ temp.temperature }}°C ({{ temp.timestamp }})
-      </li>
-    </ul>
+    <p v-if="currentTemperature">Temperatur: {{ currentTemperature.temperature }}°C ({{ currentTemperature.timestamp }})</p>
     <p v-else>Keine Temperaturdaten verfügbar</p>
   </div>
 </template>
@@ -24,12 +20,14 @@ interface TemperatureEntry {
   updatedAt: string;
 }
 
-const temperatures = ref<TemperatureEntry[]>([]);
+// Speichern der aktuellen Temperatur
+const currentTemperature = ref<TemperatureEntry | null>(null);
 
 let createSub: { unsubscribe: () => void } | null = null;
 let updateSub: { unsubscribe: () => void } | null = null;
 
 onMounted(() => {
+  // onCreate abonnieren, um neue Temperaturen zu erhalten
   createSub = client.models.Temperature.onCreate().subscribe({
     next: (newTemperature: TemperatureEntry) => {
       console.log('👀 Vollständiges onCreate-Objekt:', newTemperature);
@@ -39,14 +37,15 @@ onMounted(() => {
         return;
       }
 
-      temperatures.value = [newTemperature, ...temperatures.value];
+      // Setze die aktuelle Temperatur, falls eine neue empfangen wird
+      currentTemperature.value = newTemperature;
     },
     error: (err: any) => {
       console.error('❌ Fehler bei onCreateTemperature:', err);
     },
   });
 
-
+  // onUpdate abonnieren, um aktualisierte Temperaturen zu erhalten
   updateSub = client.models.Temperature.onUpdate().subscribe({
     next: (updatedTemperature: TemperatureEntry) => {
       if (!updatedTemperature) {
@@ -55,9 +54,11 @@ onMounted(() => {
       }
 
       console.log('Temperatur Update empfangen:', updatedTemperature);
-      temperatures.value = temperatures.value.map(temp =>
-          temp.timestamp === updatedTemperature.timestamp ? updatedTemperature : temp
-      );
+
+      // Falls der empfangene Temperaturwert eine Änderung enthält, aktualisiere den aktuellen Wert
+      if (currentTemperature.value?.timestamp === updatedTemperature.timestamp) {
+        currentTemperature.value = updatedTemperature;
+      }
     },
     error: (err: any) => {
       console.error('Fehler beim Empfangen von onUpdateTemperature:', err);
@@ -66,6 +67,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+  // Abbestellen der Subscriptions, wenn die Komponente unmontiert wird
   createSub?.unsubscribe();
   updateSub?.unsubscribe();
 });
