@@ -17,31 +17,44 @@ import type { Schema } from '../../amplify/data/resource';
 
 const client = generateClient<Schema>();
 
-// Reaktive Variable als Liste, um mehrere Temperaturdaten zu speichern
-const temperatures = ref<Array<{ temperature: string; timestamp: string }>>([]);
+interface TemperatureEntry {
+  temperature: string;
+  timestamp: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-// Subscription-Referenzen
+const temperatures = ref<TemperatureEntry[]>([]);
+
 let createSub: { unsubscribe: () => void } | null = null;
 let updateSub: { unsubscribe: () => void } | null = null;
 
 onMounted(() => {
-  // Abonnieren von onCreateTemperature
   createSub = client.models.Temperature.onCreate().subscribe({
-    next: (newTemperature: any) => {
-      console.log('Neuer Temperaturdatensatz empfangen:', newTemperature);
-      // Neuen Eintrag an den Anfang der Liste setzen
+    next: (newTemperature: TemperatureEntry) => {
+      console.log('👀 Vollständiges onCreate-Objekt:', newTemperature);
+
+      if (!newTemperature || !newTemperature.temperature) {
+        console.warn('⚠️ Kein gültiger Temperaturwert empfangen:', newTemperature);
+        return;
+      }
+
       temperatures.value = [newTemperature, ...temperatures.value];
     },
     error: (err: any) => {
-      console.error('Fehler beim Empfangen von onCreateTemperature:', err);
+      console.error('❌ Fehler bei onCreateTemperature:', err);
     },
   });
 
-  // Abonnieren von onUpdateTemperature
+
   updateSub = client.models.Temperature.onUpdate().subscribe({
-    next: (updatedTemperature: any) => {
+    next: (updatedTemperature: TemperatureEntry) => {
+      if (!updatedTemperature) {
+        console.warn('Ungültiges Temperatur-Update empfangen:', updatedTemperature);
+        return;
+      }
+
       console.log('Temperatur Update empfangen:', updatedTemperature);
-      // Vorhandenen Eintrag aktualisieren
       temperatures.value = temperatures.value.map(temp =>
           temp.timestamp === updatedTemperature.timestamp ? updatedTemperature : temp
       );

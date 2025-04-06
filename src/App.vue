@@ -3,6 +3,7 @@
   import "@aws-amplify/ui-vue/styles.css";
   import temperatureGraph from './components/temperatureGraph.vue'
   import ShowLiveTemperature from "@/components/ShowLiveTemperature.vue";
+  import Testbutton from "@/components/testbutton.vue";
 </script>
 
 <template>
@@ -10,6 +11,7 @@
     <authenticator>
       <template v-slot="{ signOut }">
         <ShowLiveTemperature />
+        <testbutton />
         <!--<temperatureGraph />-->
         <button @click="signOut">Sign Out</button>
       </template>

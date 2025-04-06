@@ -1,36 +1,35 @@
-    import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
+import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 
-    /**
-     * Definiert das Datenmodell für Temperaturwerte,
-     * die von einem IoT-Gerät (z. B. ESP32) gesendet werden.
-     */
-    const schema = a
-        .schema({
-          Temperature: a
-              .model({
+/**
+ * Definiert das Datenmodell für Temperaturwerte,
+ * die von einem IoT-Gerät (z. B. ESP32) gesendet werden.
+ */
+const schema = a
+    .schema({
+        Temperature: a
+            .model({
                 /** Temperaturwert als Text, z. B. "23.5" */
                 temperature: a.string().required(),
                 /** Zeitpunkt der Messung */
-                timestamp: a.datetime().required()
-              })
-              .identifier(['timestamp']) // Optional, du kannst auch eine andere ID verwenden
-        })
-        .authorization((allow) => [allow.publicApiKey()]);
+                timestamp: a.datetime().required(),
+                /** Automatisch gesetzter Erstellungszeitpunkt */
 
-    /**
-     * Typ für das definierte Schema basierend auf ClientSchema
-     */
-    export type Schema = ClientSchema<typeof schema>;
+                createdAt: a.datetime().required(),
+                /** Automatisch gesetzter Aktualisierungszeitpunkt */
+                updatedAt: a.datetime().required(),
+            })
+            .identifier(['timestamp']) // Optional, falls timestamp als ID genutzt wird
+    })
+    .authorization((allow) => [allow.publicApiKey()]);
 
-    /**
-     * Konfiguriert die Datenverarbeitung und Autorisierung für die Amplify API.
-     */
-    export const data = defineData({
-      schema,
-      authorizationModes: {
+export type Schema = ClientSchema<typeof schema>;
+
+export const data = defineData({
+    schema,
+    authorizationModes: {
         defaultAuthorizationMode: 'apiKey',
         apiKeyAuthorizationMode: {
-          expiresInDays: 30,
+            expiresInDays: 30,
         },
-      },
-    });
+    },
+});
