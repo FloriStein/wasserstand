@@ -13,16 +13,21 @@
   "dependencies": {
     "@aws-amplify/ui-vue": "^4.3.0",
     "@aws-sdk/client-iot-data-plane": "^3.775.0",
+    "@aws-sdk/credential-provider-cognito-identity": "^3.782.0",
+    "@aws-sdk/signature-v4": "^3.370.0",
+    "@aws-sdk/util-utf8-node": "^3.259.0",
     "@babel/plugin-transform-class-properties": "^7.25.9",
     "@babel/plugin-transform-object-rest-spread": "^7.25.9",
     "@vue/language-service": "^2.2.8",
     "aws-amplify": "^6.6.6",
+    "chart.js": "^4.4.8",
     "core-js": "^3.41.0",
     "glob": "^11.0.1",
-    "mqtt": "^5.10.4",
+    "mqtt": "^5.11.0",
     "node-fetch": "^3.3.2",
     "rimraf": "^6.0.1",
     "ts-algebra": "^2.0.0",
+    "uuid": "^11.1.0",
     "vue": "^3.4.21"
   },
   "devDependencies": {
@@ -44,5 +49,18 @@
     "typescript": "^5.8.2",
     "vite": "^6.2.4",
     "vue-tsc": "^2.2.8"
-  }
+  },
+  "description": "This repository provides a starter template for creating applications using Vue.js and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FloriStein/wasserstand.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FloriStein/wasserstand/issues"
+  },
+  "homepage": "https://github.com/FloriStein/wasserstand#readme"
 }
