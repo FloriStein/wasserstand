@@ -1,34 +1,25 @@
-import { type ClientSchema, a, defineData, defineFunction } from '@aws-amplify/backend';
+import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 
-const schema = a.schema({
-    // Modell für Temperaturwerte
-    Temperature: a.model({
-        temperature: a.string().required(),
-        timestamp: a.datetime().required(),
-        createdAt: a.datetime().required(),
-        updatedAt: a.datetime().required(),
-    }).identifier(['timestamp']),
-
-    // Custom Mutation zum Speichern in Timestream
-    storeInTimestream: a
-        .mutation()
-        .arguments({
-            temperature: a.string().required(),
-            timestamp: a.datetime().required(),
-        })
-        .returns(a.boolean())
-        .authorization((allow) => [allow.publicApiKey()]),
-
-    // Custom Mutation zum Senden an Lambda
-    sendDataToLambda: a
-        .mutation()
-        .arguments({
-            temperature: a.string().required(),
-            timestamp: a.datetime().required(),
-        })
-        .returns(a.boolean())
-        .authorization((allow) => [allow.publicApiKey()])
-});
+/**
+ * Definiert das Datenmodell für Temperaturwerte,
+ * die von einem IoT-Gerät ESP32 gesendet werden.
+ */
+const schema = a
+    .schema({
+        Temperature: a
+            .model({
+                /** Temperaturwert als Text, z.Bsp.: "23.5" */
+                temperature: a.string().required(),
+                /** Zeitpunkt der Messung */
+                timestamp: a.datetime().required(),
+                /** Automatisch gesetzter Erstellungszeitpunkt */
+                createdAt: a.datetime().required(),
+                /** Automatisch gesetzter Aktualisierungszeitpunkt */
+                updatedAt: a.datetime().required(),
+            })
+            .identifier(['timestamp']) // Optional, falls timestamp als ID genutzt wird
+    })
+    .authorization((allow) => [allow.publicApiKey()]);
 
 export type Schema = ClientSchema<typeof schema>;
 
@@ -41,4 +32,3 @@ export const data = defineData({
         },
     },
 });
-
