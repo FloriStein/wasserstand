@@ -7,7 +7,9 @@ const schema = a.schema({
         timestamp: a.datetime().required(),
         createdAt: a.datetime().required(),
         updatedAt: a.datetime().required(),
-    }).identifier(['timestamp']),
+    })
+        .identifier(['timestamp'])
+        .authorization((allow) => [allow.publicApiKey()]),  // <-- Hier ergänzen
 
     // Custom Mutation zum Speichern in Timestream
     storeInTimestream: a
